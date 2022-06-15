@@ -25,5 +25,33 @@ namespace Data
 
             return user;
         }
+
+        public async Task<bool> CheckExistingUser(User user)
+        {
+            var dbUser = await context
+              .Users
+              .SingleOrDefaultAsync(u => u.Id == user.Id);
+
+            if (dbUser != null)
+                return true;
+
+            return false;
+        }
+
+        public void DeleteUser(int id)
+        {
+            var dbUser = context.Users.FirstOrDefault(u => u.Id == id);
+            if(dbUser != null)
+            {
+                context.Users.Remove(dbUser);
+                context.SaveChanges();
+            }
+        }
+
+        public async void CreateUser(User user)
+        {
+            context.Users.Add(user);
+            context.SaveChanges();
+        }
     }
 }

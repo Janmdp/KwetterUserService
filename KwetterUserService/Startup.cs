@@ -1,4 +1,5 @@
 using Data;
+using KwetterUserService.RabbitMQ;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,6 +34,7 @@ namespace KwetterUserService
         {
 
             services.AddControllers();
+            services.AddHostedService<RabbitMqSubscriber>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "KwetterUserService", Version = "v1" });
@@ -40,7 +42,7 @@ namespace KwetterUserService
 
             services.AddDbContext<UserDbContext>(options =>
             {
-                options.UseMySql(Configuration.GetValue<string>("ConnectionString"), ServerVersion.AutoDetect(Configuration.GetValue<string>("ConnectionString")), b => b.MigrationsAssembly("KwetterUserService"));
+                options.UseMySql(Configuration.GetValue<string>("AzureDb"), ServerVersion.AutoDetect(Configuration.GetValue<string>("AzureDb")), b => b.MigrationsAssembly("KwetterUserService"));
             });
 
             services

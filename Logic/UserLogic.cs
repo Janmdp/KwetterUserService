@@ -18,5 +18,21 @@ namespace Logic
             User user = repo.GetUserByNameAsync(value).Result;
             return user;
         }
+
+        public void CreateUser(User user)
+        {
+           repo.CreateUser(user);
+
+        }
+
+        public bool CheckExistingUser(User user)
+        {
+            return repo.CheckExistingUser(user).Result;
+        }
+
+        public void DeleteUser(int id)
+        {
+            repo.DeleteUser(id);
+        }
     }
 }
