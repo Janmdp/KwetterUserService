@@ -13,9 +13,9 @@ namespace Logic
             repo = new UserRepository(context);
         }
 
-        public User GetUser(string value)
+        public User GetUser(int value)
         {
-            User user = repo.GetUserByNameAsync(value).Result;
+            User user = repo.GetUserByIdAsync(value).Result;
             return user;
         }
 

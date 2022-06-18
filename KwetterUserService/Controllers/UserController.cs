@@ -28,14 +28,14 @@ namespace KwetterUserService.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetUser()
         {
-            var username = User
+            var userId = User
                 .Claims
                 .SingleOrDefault();
 
-            if (username == null)
+            if (userId == null)
                 return Unauthorized("No valid user was supplied");
 
-            var user = logic.GetUser(username.Value);
+            var user = logic.GetUser(Convert.ToInt32(userId.Value));
 
             if (user == null)
                 return NotFound("User data could not be found at this time");

@@ -17,11 +17,11 @@ namespace Data
             context = ctx;
         }
 
-        public async Task<User> GetUserByNameAsync(string value)
+        public async Task<User> GetUserByIdAsync(int value)
         {
             var user = await context
                .Users
-               .SingleOrDefaultAsync(u => u.Username == value);
+               .SingleOrDefaultAsync(u => u.Id == value);
 
             return user;
         }
