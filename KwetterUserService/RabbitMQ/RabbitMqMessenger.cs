@@ -11,7 +11,7 @@ namespace KwetterUserService.RabbitMQ
     {
         public void SendDeleteMessage(string userId)
         {
-            var factory = new ConnectionFactory() { HostName = "localhost", Port = 49154 };
+            var factory = new ConnectionFactory() { HostName = "rabbitmq-clusterip-srv", Port = 5672 };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {

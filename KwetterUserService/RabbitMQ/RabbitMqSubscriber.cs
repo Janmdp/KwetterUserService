@@ -53,7 +53,7 @@ namespace KwetterUserService.RabbitMQ
 
         private void StartClient()
         {
-            var factory = new ConnectionFactory() { HostName = "host.docker.internal", Port = 49154 };
+            var factory = new ConnectionFactory() { HostName = "rabbitmq-clusterip-srv", Port = 5672 };
             connection = factory.CreateConnection();
             channel = connection.CreateModel();
             
